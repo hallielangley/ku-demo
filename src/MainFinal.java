@@ -3,10 +3,8 @@ import java.util.Scanner;
 
 public class MainFinal {
     public static void main(String[] args) {
-
         // Get the user's name
         System.out.println("Hello! What is your name? ");
-
         String name = "";
         try {
             Scanner input = new Scanner(System.in);
