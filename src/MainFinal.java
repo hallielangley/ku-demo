@@ -3,25 +3,23 @@ import java.util.Scanner;
 
 public class MainFinal {
     public static void main(String[] args) {
+        String name = null;
+        int age = -1;
+
         // Get the user's name
         System.out.println("Hello! What is your name? ");
-        String name = "";
         try {
-            Scanner input = new Scanner(System.in);
-            name = input.next();
-
-            if (name.equals("badword")) {
-                throw new BadNameException();
-            }
-
-            System.out.print("It's nice to meet you " + name + "! ");
+            Scanner nameIn = new Scanner(System.in);
+            name = nameIn.next();
+            validateName(name);
         } catch (BadNameException e) {
-            System.out.print("That's not a nice name, but moving on... ");
+            name = "[REDACTED]";
+            System.out.println("**" + e.getMessage() + "**");
         }
+        System.out.print("Hi " + name + "! ");
 
         // Get the user's age
         System.out.println("How old are you?");
-        int age = -1;
         while (true) {
             try {
                 Scanner ageIn = new Scanner(System.in);
@@ -35,7 +33,16 @@ public class MainFinal {
 
     }
 
+    static void validateName(String name) throws BadNameException {
+        if (name.equals("bad")) {
+            throw new BadNameException("Name redacted for profanity.");
+        }
+    }
+
     static class BadNameException extends Exception {
 
+        public BadNameException(String message) {
+            super(message);
+        }
     }
 }
